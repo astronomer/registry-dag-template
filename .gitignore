@@ -1,3 +1,7 @@
 .git
 .env
 airflow_settings.yaml
+*.pyc
+*/__pycache__/*
+.vim/
+Pip*
