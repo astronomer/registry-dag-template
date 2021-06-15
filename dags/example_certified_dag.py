@@ -7,6 +7,13 @@ from airflow.utils.task_group import TaskGroup
 from datetime import datetime, timedelta
 from include.example_custom_function import custom_function
 
+
+"""
+This DAG is intended to be an example of what a Certified DAG should look like.  It is
+based on the `example-dag.py` file that is included with projects initialized with the
+`astro dev init` Astro CLI command.
+"""
+
 # Default settings applied to all tasks within the DAG.
 DEFAULT_ARGS = dict(
     owner="airflow",
