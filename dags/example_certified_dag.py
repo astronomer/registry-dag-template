@@ -5,7 +5,7 @@ from airflow.operators.python import PythonOperator
 from airflow.utils.task_group import TaskGroup
 
 from datetime import datetime, timedelta
-from include.custom_function import custom_function
+from include.example_custom_function import custom_function
 
 # Default settings applied to all tasks within the DAG.
 DEFAULT_ARGS = dict(
