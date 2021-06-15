@@ -1,6 +1,5 @@
 .git
 .env
-.astro
 airflow_settings.yaml
 *.pyc
 */__pycache__/*
