@@ -8,7 +8,7 @@ def custom_function(task_number: int, **context) -> None:
     """
 
     print(
-        f"I am task number {task_number}."
-        f"This DAG Run execution date is {context['ts']} and the current time is {datetime.now()}"
+        f"I am task number {task_number}. "
+        f"This DAG Run execution date is {context['ts']} and the current time is {datetime.now()}."
     )
     print(f"Here is the full DAG Run context: {context}")
