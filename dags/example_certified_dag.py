@@ -2,7 +2,6 @@ from airflow.decorators import dag, task, task_group
 from airflow.operators.dummy import DummyOperator
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
-from airflow.utils.task_group import TaskGroup
 
 from datetime import datetime, timedelta
 
@@ -39,7 +38,7 @@ def certified_dag():
     t_end = DummyOperator(task_id="end")
 
     @task_group
-    def group_bash_tasks(command):
+    def group_bash_tasks(command) -> None:
         t1 = BashOperator(
             task_id="bash_begin",
             bash_command="echo begin bash commands",
