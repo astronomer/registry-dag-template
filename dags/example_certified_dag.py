@@ -82,6 +82,3 @@ def certified_dag():
 
 
 dag = certified_dag()
-
-from pprint import pprint
-pprint(dag.tasks)
