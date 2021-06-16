@@ -46,11 +46,11 @@ def certified_dag():
         )
         t2 = BashOperator(
             task_id="bash_print_date2",
-            bash_command=sleep,
+            bash_command=command,
         )
         t3 = BashOperator(
             task_id="bash_print_date3",
-            bash_command=sleep,
+            bash_command=command,
         )
 
         # Lists can be used to specify tasks to execute in parallel.
