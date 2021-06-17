@@ -58,9 +58,9 @@ def certified_dag():
     sleep = "sleep $[ ( $RANDOM % 30 )  + 1 ]s && date"
     group_bash_tasks(command=sleep)
 
-    # Generate tasks with a loop. The `task_id` must be unique across all tasks in a DAG.
+    # Generate tasks with a loop.
     for task_number in range(5):
-
+        # The `task_id` must be unique across all tasks in a DAG.
         @task(task_id=f"python_print_date_{task_number}")
         def custom_function(task_number: int, **context) -> None:
             """
