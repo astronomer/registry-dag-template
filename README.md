@@ -1,7 +1,7 @@
 # Certified DAG Template
 ### This template is meant to standardize the repository structure and provide customized files where necessary for Certified DAGs which will be surfaced on the Astronomer Registry.  
 
-### Follow the steps below to use the template and initialize a new repository locally.
+Follow the steps below to use the template and initialize a new repository locally.
 
 1. Above the file list, click **Use this template**
 
