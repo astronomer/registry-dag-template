@@ -1,7 +1,8 @@
-from airflow.decorators import dag, task, task_group
+from airflow.decorators import dag, task
 from airflow.operators.dummy import DummyOperator
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+from airflow.utils.task_group import TaskGroup
 
 from datetime import datetime, timedelta
 
@@ -37,26 +38,26 @@ def certified_dag():
     t_start = DummyOperator(task_id="start")
     t_end = DummyOperator(task_id="end")
 
-    @task_group
-    def group_bash_tasks(command) -> None:
+    with TaskGroup("group_bash_tasks") as group_bash_tasks:
+        sleep = "sleep $[ ( $RANDOM % 30 )  + 1 ]s && date"
+
         t1 = BashOperator(
             task_id="bash_begin",
             bash_command="echo begin bash commands",
         )
         t2 = BashOperator(
             task_id="bash_print_date2",
-            bash_command=command,
+            bash_command=sleep,
         )
         t3 = BashOperator(
             task_id="bash_print_date3",
-            bash_command=command,
+            bash_command=sleep,
         )
 
         # Lists can be used to specify tasks to execute in parallel.
-        t_start >> t1 >> [t2, t3] >> t_end
+        t1 >> [t2, t3]
 
-    sleep = "sleep $[ ( $RANDOM % 30 )  + 1 ]s && date"
-    group_bash_tasks(command=sleep)
+    t_start >> group_bash_tasks >> t_end
 
     # Generate tasks with a loop.
     for task_number in range(5):
