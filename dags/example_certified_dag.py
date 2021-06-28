@@ -13,21 +13,19 @@ based on the `example-dag.py` file that is included with projects initialized wi
 `astro dev init` Astro CLI command.
 """
 
-# Default settings applied to all tasks within the DAG.
-DEFAULT_ARGS = dict(
-    owner="airflow",
-    depends_on_past=False,
-    email_on_failure=False,
-    email_on_retry=False,
-    retries=1,
-    retry_delay=timedelta(minutes=5),
-)
-
 DAG_ARGS = dict(
     start_date=datetime(2021, 6, 11),
     max_active_runs=3,
     schedule_interval="@daily",
-    default_args=DEFAULT_ARGS,
+    # Default settings applied to all tasks within the DAG.
+    default_args=dict(
+        owner="airflow",
+        depends_on_past=False,
+        email_on_failure=False,
+        email_on_retry=False,
+        retries=1,
+        retry_delay=timedelta(minutes=3),
+    ),
     catchup=False,
 )
 
