@@ -4,7 +4,7 @@
   </a>
 </p>
 <h1 align="center">
-  Astronomer Registry DAG Template Repository
+  Astronomer Registry DAG Template
 </h1>
   <h3 align="center">
   Guidelines on building, organizing, and publishing example DAGs for the Airflow community to discover, find inspiration from, and utilize. Maintained with ❤️ by Astronomer.
