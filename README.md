@@ -7,7 +7,9 @@
   Registry DAG Template
 </h1>
   <h3 align="center">
-  Guidelines on building, organizing, and publishing example DAGs for the Airflow community to discover and find inspiration from on the <a href="https://registry.astronomer.io/">Astronomer Registry</a>.  Maintained with ❤️ by Astronomer.
+  Guidelines on building, organizing, and publishing example DAGs for the Airflow community to discover and find inspiration from on the <a href="https://registry.astronomer.io/">Astronomer Registry</a>.
+  </br></br> 
+  Maintained with ❤️ by Astronomer.
 </h3>
 
 </br>
@@ -141,6 +143,4 @@ Follow the steps below to use the template and initialize a new repository local
 ## Publishing your DAG repository for the Astronomer Registry
 
 Head over to the Astronomer Registry and [fill out the form](https://registry.astronomer.io/publish) with your shiny new DAG repo details!
-
-![image](https://user-images.githubusercontent.com/48934154/125511843-729b1b6e-5e2e-43a4-a652-b532ee2fba99.png)
 
