@@ -29,7 +29,7 @@ Follow the steps below to use the template and initialize a new repository local
 
 5. Clone the repository locally. Refer to the GitHub [documentation](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository) for different options of cloning repositories.
 
-6. [Optional] Navigate to where the repository was cloned and run the following Astro CLI command to update the project.name setting in the .astro/config.yaml file provided in the repository.  This will update the name used to generate Docker containers and make them more discernible if there are multiple Certified DAGs initialized locally. 
+6. [Optional] Navigate to where the repository was cloned and run the following Astro CLI command to update the `project.name` setting in the `.astro/config.yaml` file provided in the repository.  This will update the name used to generate Docker containers and make them more discernible if there are multiple Certified DAGs initialized locally. 
 ```bash
 astro config set project.name <name of repository>
 ```
