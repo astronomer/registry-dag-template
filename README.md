@@ -55,7 +55,7 @@ Here are additional details about these files plus other directories and files t
 
 **`README.md`**
 
-  The README for your example DAG repository has an understated importance -- it provides necessary context for the Airflow community about your DAG.  Feel free to include a use case description or a reason _why_ the DAG was created or even _how_ it can be used, the Airflow Providers used, etc.  The more details, the better.
+  The README for your example DAG repository has an understated importance -- it provides necessary context for the Airflow community about your DAG.  Feel free to include a use case description or a reason _why_ the DAG was created or even _how_ it can be used, the Airflow Providers used, the connections that are assumed to be in place to run the DAG, etc.  The more details, the better.
 
 **`requirements.txt`**
 
@@ -140,4 +140,7 @@ Follow the steps below to use the template and initialize a new repository local
 
 ## Publishing your DAG repository for the Astronomer Registry
 
-  `TODO`
+Head over to the Astronomer Registry and [fill out the form](https://registry.astronomer.io/publish) with your shiny new DAG repo details!
+
+![image](https://user-images.githubusercontent.com/48934154/125511843-729b1b6e-5e2e-43a4-a652-b532ee2fba99.png)
+
