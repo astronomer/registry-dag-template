@@ -21,7 +21,7 @@
 </br>
 
 ## Before you begin
-The easiest way to get started developing and running Apache Airflow pipelines locally is with the Astro CLI. Learn how to install it [here](https://www.astronomer.io/docs/cloud/stable/develop/cli-quickstart).  The CLI is also the best way to take advantage of this repository template.
+An easy way to get started developing and running Apache Airflow pipelines locally is with the Astro CLI. Learn how to install it [here](https://www.astronomer.io/docs/cloud/stable/develop/cli-quickstart).  The CLI is also a great way to take advantage of this repository template.
 
 </br>
 
