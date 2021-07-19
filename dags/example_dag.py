@@ -9,6 +9,7 @@ from airflow.operators.dummy import DummyOperator
 from airflow.operators.email import EmailOperator
 from airflow.operators.python import BranchPythonOperator
 from airflow.operators.weekday import BranchDayOfWeekOperator
+from airflow.utils.edgemodifier import Label
 from airflow.utils.task_group import TaskGroup
 from airflow.utils.trigger_rule import TriggerRule
 from airflow.utils.weekday import WeekDay
@@ -39,7 +40,7 @@ def going_to_the_beach() -> Dict[str, str]:
 # Using the DAG object as a context manager, the `dag` argument doesn't need to be specified
 # for each task.
 with DAG(
-    dag_id="example_community_dag",
+    dag_id="example_registry_dag",
     start_date=datetime(2021, 6, 11),  # Best practice is to use a static start_date.
     max_active_runs=1,
     schedule_interval="@daily",
@@ -79,7 +80,7 @@ with DAG(
         )
 
         for day, activity in WEEKDAY_ACTIVITY_MAPPING.items():
-            day_of_week = DummyOperator(task_id=day)
+            day_of_week = Label(label=day)
             do_activity = BashOperator(
                 task_id=activity.replace(" ", "_"),
                 bash_command=f"echo 'It's {day.capitalize()} and I'm busy with {activity}.'",
@@ -112,7 +113,7 @@ with DAG(
         )
 
         chain(which_weekend_activity_day, [saturday, sunday])
-        chain(saturday, going_to_the_beach, inviting_friends, end)
+        chain(saturday, going_to_the_beach)
         chain(sunday, sleeping_in, end)
 
     # High-level dependencies.
