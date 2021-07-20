@@ -68,14 +68,14 @@ with DAG(
     weekend = DummyOperator(task_id="weekend")
     weekday = DummyOperator(task_id="weekday")
 
-    # Templated value for determining the name of the day of week based on the execution date.
-    day_name = "{{ execution_date.strftime('%A').lower() }}"
+    # Templated value for determining the name of the day of week based on the start date of the DagRun.
+    day_name = "{{ dag_run.start_date.strftime('%A').lower() }}"
 
     # Begin weekday tasks.
     with TaskGroup("weekday_activities") as weekday_activities:
         which_weekday_activity_day = BranchPythonOperator(
             task_id="which_weekday_activity_day",
-            python_callable=lambda day_name: f"weekday_activities.{day_name}",
+            python_callable=lambda day_name: f"weekday_activities.{WEEKDAY_ACTIVITY_MAPPING[day_name].replace(' ', '_')}",
             op_args=[day_name],
         )
 
@@ -83,7 +83,7 @@ with DAG(
             day_of_week = Label(label=day)
             do_activity = BashOperator(
                 task_id=activity.replace(" ", "_"),
-                bash_command=f"echo 'It's {day.capitalize()} and I'm busy with {activity}.'",
+                bash_command=f"echo It's {day.capitalize()} and I'm busy with {activity}.",
             )
 
             chain(which_weekday_activity_day, day_of_week, do_activity)
@@ -92,7 +92,11 @@ with DAG(
     with TaskGroup("weekend_activities") as weekend_activities:
         which_weekend_activity_day = BranchPythonOperator(
             task_id="which_weekend_activity_day",
-            python_callable=lambda day_name: f"weekend_activities.{day_name}",
+            python_callable=(
+                lambda day_name: "weekend_activities.sleeping_in"
+                if day_name == "sunday"
+                else "weekend_activities.going_to_the_beach"
+            ),
             op_args=[day_name],
         )
 
