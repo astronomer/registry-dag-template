@@ -92,11 +92,7 @@ with DAG(
     with TaskGroup("weekend_activities") as weekend_activities:
         which_weekend_activity_day = BranchPythonOperator(
             task_id="which_weekend_activity_day",
-            python_callable=(
-                lambda day_name: "weekend_activities.sleeping_in"
-                if day_name == "sunday"
-                else "weekend_activities.going_to_the_beach"
-            ),
+            python_callable=lambda day_name: f"weekend_activities.{'sleeping_in' if day_name == 'sunday' else 'going_to_the_beach'}",
             op_args=[day_name],
         )
 
