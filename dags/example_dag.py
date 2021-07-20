@@ -96,12 +96,10 @@ with DAG(
             op_args=[day_name],
         )
 
-        saturday = DummyOperator(task_id="saturday")
-        sunday = DummyOperator(task_id="sunday")
+        saturday = Label(label="saturday")
+        sunday = Label(label="sunday")
 
-        sleeping_in = BashOperator(
-            task_id="sleeping_in", bash_command="sleep $[ ( $RANDOM % 30 )  + 1 ]s"
-        )
+        sleeping_in = BashOperator(task_id="sleeping_in", bash_command="sleep $[ ( $RANDOM % 30 )  + 1 ]s")
 
         going_to_the_beach = going_to_the_beach()
 
@@ -112,9 +110,7 @@ with DAG(
             html_content=going_to_the_beach["body"],
         )
 
-        chain(which_weekend_activity_day, [saturday, sunday])
-        chain(saturday, going_to_the_beach)
-        chain(sunday, sleeping_in, end)
+        chain(which_weekend_activity_day, [saturday, sunday], [going_to_the_beach, sleeping_in])
 
     # High-level dependencies.
     chain(begin, check_day_of_week, [weekday, weekend])
