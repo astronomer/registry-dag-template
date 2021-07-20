@@ -103,6 +103,8 @@ with DAG(
 
         going_to_the_beach = going_to_the_beach()
 
+        # Because the `going_to_the_beach()` function has `multiple_outputs` enabled, each dict key is accessible
+        # as their own `XCom` key.
         inviting_friends = EmailOperator(
             task_id="inviting_friends",
             to="friends@community.com",
