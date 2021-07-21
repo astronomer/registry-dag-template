@@ -20,21 +20,32 @@ This DAG is intended to be an example for community-provided DAGs.
 """
 
 # Reference data for determining the activity to perform per day of week.
-WEEKDAY_ACTIVITY_MAPPING = {
-    "monday": "guitar lessons",
-    "tuesday": "studying",
-    "wednesday": "soccer practice",
-    "thursday": "contributing to Airflow",
-    "friday": "family dinner",
+DAY_ACTIVITY_MAPPING = {
+    "monday": {"is_weekday": True, "activity": "guitar lessons"},
+    "tuesday": {"is_weekday": True, "activity": "studying"},
+    "wednesday": {"is_weekday": True, "activity": "soccer practice"},
+    "thursday": {"is_weekday": True, "activity": "contributing to Airflow"},
+    "friday": {"is_weekday": True, "activity": "family dinner"},
+    "saturday": {"is_weekday": False, "activity": "going to the beach"},
+    "sunday": {"is_weekday": False, "activity": "sleeping in"},
 }
 
 
 @task(multiple_outputs=True)
-def going_to_the_beach() -> Dict[str, str]:
+def going_to_the_beach() -> Dict:
     return {
         "subject": "Beach day!",
         "body": "It's Saturday and I'm heading to the beach.<br><br>Come join me!<br>",
     }
+
+
+def _get_activity(day_name) -> str:
+    activity_id = DAY_ACTIVITY_MAPPING[day_name]["activity"].replace(" ", "_")
+
+    if DAY_ACTIVITY_MAPPING[day_name]["is_weekday"]:
+        return f"weekday_activities.{activity_id}"
+
+    return f"weekend_activities.{activity_id}"
 
 
 # Using the DAG object as a context manager, the `dag` argument doesn't need to be specified
@@ -75,24 +86,27 @@ with DAG(
     with TaskGroup("weekday_activities") as weekday_activities:
         which_weekday_activity_day = BranchPythonOperator(
             task_id="which_weekday_activity_day",
-            python_callable=lambda day_name: f"weekday_activities.{WEEKDAY_ACTIVITY_MAPPING[day_name].replace(' ', '_')}",
+            python_callable=_get_activity,
             op_args=[day_name],
         )
 
-        for day, activity in WEEKDAY_ACTIVITY_MAPPING.items():
-            day_of_week = Label(label=day)
-            do_activity = BashOperator(
-                task_id=activity.replace(" ", "_"),
-                bash_command=f"echo It's {day.capitalize()} and I'm busy with {activity}.",
-            )
+        for day, day_info in DAY_ACTIVITY_MAPPING.items():
+            if day_info["is_weekday"]:
+                day_of_week = Label(label=day)
+                activity = day_info["activity"]
 
-            chain(which_weekday_activity_day, day_of_week, do_activity)
+                do_activity = BashOperator(
+                    task_id=activity.replace(" ", "_"),
+                    bash_command=f"echo It's {day.capitalize()} and I'm busy with {activity}.",
+                )
+
+                chain(which_weekday_activity_day, day_of_week, do_activity)
 
     # Begin weekend tasks.
     with TaskGroup("weekend_activities") as weekend_activities:
         which_weekend_activity_day = BranchPythonOperator(
             task_id="which_weekend_activity_day",
-            python_callable=lambda day_name: f"weekend_activities.{'sleeping_in' if day_name == 'sunday' else 'going_to_the_beach'}",
+            python_callable=_get_activity,
             op_args=[day_name],
         )
 
@@ -115,9 +129,7 @@ with DAG(
         chain(which_weekend_activity_day, [saturday, sunday], [going_to_the_beach, sleeping_in])
 
     # High-level dependencies.
-    chain(begin, check_day_of_week, [weekday, weekend])
-    chain(weekday, weekday_activities, end)
-    chain(weekend, weekend_activities, end)
+    chain(begin, check_day_of_week, [weekday, weekend], [weekday_activities, weekend_activities], end)
 
     # Task dependency created by XComArgs:
     #   going_to_the_beach >> inviting_friends
