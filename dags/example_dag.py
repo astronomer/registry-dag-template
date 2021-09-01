@@ -48,7 +48,7 @@ def _get_activity(day_name) -> str:
     return f"weekend_activities.{activity_id}"
 
 
-# Using the DAG object as a context manager, the `dag` argument doesn't need to be specified
+# Using the DAG object as a context manager, the ``dag`` argument doesn't need to be specified
 # for each task.
 with DAG(
     dag_id="example_registry_dag",
@@ -100,7 +100,8 @@ with DAG(
                     bash_command=f"echo It's {day.capitalize()} and I'm busy with {activity}.",
                 )
 
-                chain(which_weekday_activity_day, day_of_week, do_activity)
+                # Declaring task dependencies within the `TaskGroup` via the classic bitshift operator.
+                which_weekday_activity_day >> day_of_week >> do_activity
 
     # Begin weekend tasks.
     with TaskGroup("weekend_activities") as weekend_activities:
@@ -117,8 +118,8 @@ with DAG(
 
         going_to_the_beach = going_to_the_beach()
 
-        # Because the `going_to_the_beach()` function has `multiple_outputs` enabled, each dict key is accessible
-        # as their own `XCom` key.
+        # Because the ``going_to_the_beach()`` function has ``multiple_outputs`` enabled, each dict key is
+        # accessible as their own `XCom` key.
         inviting_friends = EmailOperator(
             task_id="inviting_friends",
             to="friends@community.com",
@@ -126,6 +127,8 @@ with DAG(
             html_content=going_to_the_beach["body"],
         )
 
+        # Using ``chain()`` here for list-to-list dependencies which are not supported by the bitshift
+        # operator and to simplify the notation for more a complex dependency structure.
         chain(which_weekend_activity_day, [saturday, sunday], [going_to_the_beach, sleeping_in])
 
     # High-level dependencies.
