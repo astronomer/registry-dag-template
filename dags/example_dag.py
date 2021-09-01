@@ -128,7 +128,7 @@ with DAG(
         )
 
         # Using ``chain()`` here for list-to-list dependencies which are not supported by the bitshift
-        # operator and to simplify the notation for more a complex dependency structure.
+        # operator and to simplify the notation for the desired dependency structure.
         chain(which_weekend_activity_day, [saturday, sunday], [going_to_the_beach, sleeping_in])
 
     # High-level dependencies.
