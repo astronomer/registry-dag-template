@@ -31,7 +31,7 @@ DAY_ACTIVITY_MAPPING = {
 
 
 @task(multiple_outputs=True)
-def going_to_the_beach() -> Dict:
+def _going_to_the_beach() -> Dict:
     return {
         "subject": "Beach day!",
         "body": "It's Saturday and I'm heading to the beach.<br><br>Come join me!<br>",
@@ -115,7 +115,7 @@ def example_registry_dag():
 
         sleeping_in = BashOperator(task_id="sleeping_in", bash_command="sleep $[ ( $RANDOM % 30 )  + 1 ]s")
 
-        going_to_the_beach = going_to_the_beach()
+        going_to_the_beach = _going_to_the_beach()
 
         # Because the ``going_to_the_beach()`` function has ``multiple_outputs`` enabled, each dict key is
         # accessible as their own `XCom` key.
