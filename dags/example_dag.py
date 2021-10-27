@@ -1,8 +1,7 @@
 from datetime import datetime, timedelta
 from typing import Dict
 
-from airflow.decorators import task
-from airflow.models import DAG
+from airflow.decorators import dag, task
 from airflow.models.baseoperator import chain
 from airflow.operators.bash import BashOperator
 from airflow.operators.dummy import DummyOperator
@@ -48,10 +47,9 @@ def _get_activity(day_name) -> str:
     return f"weekend_activities.{activity_id}"
 
 
-# Using the DAG object as a context manager, the ``dag`` argument doesn't need to be specified
-# for each task.
-with DAG(
-    dag_id="example_registry_dag",
+# When using the DAG decorator, the ``dag`` argument doesn't need to be specified for each task.
+# The ``dag_id`` value defaults to the name of the function it is decorating.
+@dag(
     start_date=datetime(2021, 6, 11),  # Best practice is to use a static start_date.
     max_active_runs=1,
     schedule_interval="@daily",
@@ -64,7 +62,8 @@ with DAG(
     default_view="graph",
     catchup=False,
     tags=["example"],
-) as dag:
+)
+def example_registry_dag():
     begin = DummyOperator(task_id="begin")
     end = DummyOperator(task_id="end", trigger_rule=TriggerRule.NONE_FAILED)
 
@@ -136,3 +135,5 @@ with DAG(
 
     # Task dependency created by XComArgs:
     #   going_to_the_beach >> inviting_friends
+
+dag = example_registry_dag()
