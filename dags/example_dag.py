@@ -15,7 +15,9 @@ from airflow.utils.weekday import WeekDay
 
 
 """
-This DAG is intended to be an example for community-provided DAGs.
+This DAG is intended to be a demonstration of a number of core Airflow concepts related to pipeline authoring
+including TaskFlow API, branching, Edge Labels, Jinja templating, dynamic task generation, Task Groups, and
+Trigger Rules.
 """
 
 # Reference data for determining the activity to perform per day of week.
@@ -61,6 +63,7 @@ def _get_activity(day_name) -> str:
     default_view="graph",
     catchup=False,
     tags=["example"],
+    doc_md=__doc__,
 )
 def example_registry_dag():
     begin = DummyOperator(task_id="begin")
