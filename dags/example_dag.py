@@ -55,7 +55,6 @@ def _get_activity(day_name) -> str:
     schedule_interval="@daily",
     # Default settings applied to all tasks within the DAG; can be overwritten at the task level.
     default_args={
-        "owner": "community",
         "retries": 1,
         "retry_delay": timedelta(minutes=3),
     },
