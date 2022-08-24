@@ -6,10 +6,8 @@ from airflow.models.baseoperator import chain
 from airflow.operators.bash import BashOperator
 from airflow.operators.email import EmailOperator
 from airflow.operators.empty import EmptyOperator
-# from airflow.operators.python import BranchPythonOperator
 from airflow.operators.weekday import BranchDayOfWeekOperator
 from airflow.utils.edgemodifier import Label
-# from airflow.utils.task_group import TaskGroup
 from airflow.utils.trigger_rule import TriggerRule
 from airflow.utils.weekday import WeekDay
 
