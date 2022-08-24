@@ -1,4 +1,5 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
+from pendulum import datetime
 from typing import Dict
 
 from airflow.decorators import dag, task, task_group
