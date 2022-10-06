@@ -183,9 +183,15 @@ Follow the steps below to use the template and initialize a new repository local
 
 </br>
 
+## Key requirements
+- The DAG _must_ have a top-level docstring. The docstring should comprise of the title of DAG on a first, standalone line (this will be used as the title displayed on the Astronomer Registry), then a following paragraph describing the DAG itself. This will be used as the DAG description on the Registry.
+
+- The repo _must_ have at least one [semantically versioned](https://semver.org/) tag. Repository tags are how the Astronomer Registry will know new DAG updates have occurred and to propagate those updates to the Registry. (More on this in the next section.)
+
+
 ## Publishing your DAG repository for the Astronomer Registry
 
-If you have never submitted your DAG repository for publication to the Astronomer Registry, [create a new release/tag for your repository](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) on the `main` branch. Ultimately, the backend of the Astronomer Registry will check for new tags of DAG repository to trigger updating the DAG on the Registry.
+If you have never submitted your DAG repository for publication to the Astronomer Registry, [create a new release/tag for your repository](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) on the `main` branch. Ultimately, the backend of the Astronomer Registry will check for new tags for a DAG repository to trigger updating the DAG on the Registry.
 
 > **NOTE:** Tags for the repository must follow typical [semantic versioning](https://semver.org/).
 
