@@ -1,3 +1,7 @@
+# This file is intended to be a file which specifically calls out DAGs to be published to the Astronomer
+# Registry. The file should not be packaged and solely lives in the repo. The DAGs listed should pertain
+# to latest released version of the repo.
+
 # These categories will be applied to all DAGs in the repo.
 categories:
   - Airflow Fundamentals
