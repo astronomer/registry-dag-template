@@ -1,3 +1,11 @@
+"""
+This will be the DAG display title on the Astronomer Registry
+
+This DAG is intended to be a demonstration of a number of core Airflow concepts related to pipeline authoring
+including TaskFlow API, branching, Edge Labels, Jinja templating, dynamic task generation, Task Groups, and
+Trigger Rules.
+"""
+
 from datetime import timedelta
 from pendulum import datetime
 from typing import Dict
@@ -12,12 +20,6 @@ from airflow.utils.edgemodifier import Label
 from airflow.utils.trigger_rule import TriggerRule
 from airflow.utils.weekday import WeekDay
 
-
-"""
-This DAG is intended to be a demonstration of a number of core Airflow concepts related to pipeline authoring
-including TaskFlow API, branching, Edge Labels, Jinja templating, dynamic task generation, Task Groups, and
-Trigger Rules.
-"""
 
 # Reference data for determining the activity to perform per day of week.
 DAY_ACTIVITY_MAPPING = {
