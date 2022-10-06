@@ -143,4 +143,4 @@ def example_registry_dag():
     chain(begin, check_day_of_week, [weekday, weekend], [weekday_tasks, weekend_tasks], end)
 
 
-dag = example_registry_dag()
+example_registry_dag()
