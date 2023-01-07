@@ -129,7 +129,7 @@ Here are additional details about these files plus other directories and files t
 │   ├── operators
 │   │   ├── __init__.py
 │   │   └── custom_operator.py
-│   └── sql
+│   ├── sql
 │   │   ├── extract
 │   │   │   └── extract_data.sql
 │   │   ├── load
