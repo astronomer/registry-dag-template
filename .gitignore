@@ -3,6 +3,7 @@
 airflow_settings.yaml
 *.pyc
 */__pycache__/*
+.idea/
 .vim/
 Pip*
 *DS_Store
