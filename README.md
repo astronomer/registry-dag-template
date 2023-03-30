@@ -88,7 +88,7 @@ Here are additional details about these files plus other directories and files t
     - path: dags/example_dags.py  # Must be the path/to/the/dag_file.py
   ```
 
-  More that one category can be assigned to the DAGs. The following DAG categories are currently supported on the Astronomer Registry so you pick the ones the best described your repo of DAGs:
+  More than one category can be assigned to the DAGs. The following DAG categories are currently supported on the Astronomer Registry so you pick the ones the best described your repo of DAGs:
   - AI + Machine Learning
   - Airflow Fundamentals
   - Alerts/Notifications
@@ -108,6 +108,7 @@ Here are additional details about these files plus other directories and files t
   - Infrastructure (IaaS)
   - Logging & Monitoring
   - Machine Learning
+  - Model Registry
   - Orchestration
   - Public Cloud
   - Query Engines
