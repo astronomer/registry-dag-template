@@ -1,3 +1,6 @@
+> [!WARNING]
+> **This repository is no longer maintained and has been archived.** The Astronomer Registry is being sunset in favor of the [Apache Airflow OSS Registry](https://airflow.apache.org/registry). Please refer to the OSS Registry for the latest Airflow resources.
+
 <p align="center">
   <a href="https://www.airflow.apache.org">
     <img alt="Airflow" src="https://cwiki.apache.org/confluence/download/attachments/145723561/airflow_transparent.png?api=v2" width="60" />
