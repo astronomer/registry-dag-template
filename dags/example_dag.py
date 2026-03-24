@@ -1,6 +1,9 @@
 """
-This will be the DAG display title on the Astronomer Registry
+### This will be the DAG display title on the Astronomer Registry. Don't use more than ~8 words on the title.
 
+The first sentence here will be the DAG description. Be descriptive, but concise. 
+
+Add as much detail as you want here. Talk through what the DAG is doing, the different providers used, and any additional setup instructions.
 This DAG is intended to be a demonstration of a number of core Airflow concepts related to pipeline authoring
 including TaskFlow API, branching, Edge Labels, Jinja templating, dynamic task generation, Task Groups, and
 Trigger Rules.
